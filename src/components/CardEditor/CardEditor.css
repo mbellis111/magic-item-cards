@@ -1,0 +1,27 @@
+.card-editor-component {
+  .card-editor {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .edit-fields {
+    justify-content: flex-start;
+    align-items: start;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex: 2;
+    padding: 10px;
+  }
+
+  .item-card {
+    display: flex;
+    flex: 2;
+    justify-content: flex-start;
+    padding: 10px;
+  }
+
+  .section-header {
+    font-size: 18px;
+    font-weight: 600;
+  }
+}

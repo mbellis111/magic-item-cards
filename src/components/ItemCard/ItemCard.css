@@ -1,0 +1,68 @@
+.item-card-component {
+  .image-container {
+    /* Set the container position to relative so absolute positioning inside works */
+    position: relative;
+    width: 352px;
+    height: 528px;
+  }
+
+  .template-image {
+    /* Ensure the image fills its container */
+    width: 352px;
+    height: 528px;
+    display: block;
+  }
+
+  .overlay-image {
+    top: 16%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    height: 129px;
+    width: auto;
+    object-fit: contain;
+    position: absolute;
+    z-index: 10;
+    filter: grayscale(100%);
+    /* For older versions of Safari */
+    -webkit-filter: grayscale(100%);
+  }
+
+  .overlay-text {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    color: black;
+    text-align: center;
+    z-index: 10;
+    pointer-events: none;
+    font-family: 'CrimsonText', serif;
+  }
+
+  .overlay-text-name {
+    top: 8.25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 55%;
+    font-weight: 600;
+  }
+
+  .overlay-text-details {
+    top: 45.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    font-style: italic;
+  }
+
+  .overlay-text-description {
+    top: 74%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    height: 42%;
+    text-align: left;
+
+    p {
+      white-space: pre-wrap;
+    }
+  }
+}

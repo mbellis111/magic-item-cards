@@ -1,0 +1,35 @@
+.print-view-component {
+
+  .print-button {
+    margin-bottom: 25px;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(4, 352px);
+  }
+
+  @media print {
+    /* Show the specific element and its children to print */
+    .printable-area, .printable-area * {
+      visibility: visible !important;
+    }
+
+    /* Position the printable area to the top-left corner and adjust layout */
+    .printable-area {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      padding: 10mm;
+    }
+  }
+}
+
+@media print {
+  /* Hide all elements by default */
+  body * {
+    visibility: hidden !important;
+  }
+}
