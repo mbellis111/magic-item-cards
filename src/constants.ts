@@ -1,5 +1,6 @@
 export const exampleItemName = 'Staff of Fire';
-export const exampleItemDetails = ' Staff, very rare (requires attunement by a Druid, Sorcerer, Warlock, or Wizard)';
+export const exampleItemDetails =
+  ' Staff, very rare (requires attunement by a Druid, Sorcerer, Warlock, or Wizard)';
 //export const exampleItemDescription = "You have a bonus to attack and damage rolls made with this magic weapon.";
 export const exampleItemDescription = `
 The staff has 10 charges.

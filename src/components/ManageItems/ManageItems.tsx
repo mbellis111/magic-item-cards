@@ -1,44 +1,133 @@
-import {useItemsContext} from '../../state/ItemsHook.tsx';
-import type {ItemCardData} from '../../types.ts';
-import type {ReactElement} from 'react';
+import { useItemsContext } from '../../state/ItemsHook.tsx';
+import type { ItemCardData } from '../../types.ts';
+import type { ReactElement } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  CardActions,
+  CardContent,
+  styled,
+  Typography,
+} from '@mui/material';
+import { saveAs } from 'file-saver';
 import './ManageItems.css';
 
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
+
 const ManageItems = () => {
-  const { items } = useItemsContext();
+  const { items, setItems, deleteItem } = useItemsContext();
 
   function renderItem(item: ItemCardData): ReactElement {
-    const displayText = item.name + " ID: " + item.uuid;
     return (
       <ListItem>
-        {displayText}
+        <Card sx={{ maxWidth: 345 }}>
+          <CardContent>
+            <Typography gutterBottom variant='h5' component='div'>
+              {item.name}
+            </Typography>
+            <Typography variant='body2' sx={{ color: 'text.secondary' }}>
+              {item.details}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size='small'>Edit</Button>
+            <Button size='small' onClick={() => deleteItem(item)}>
+              Delete
+            </Button>
+          </CardActions>
+        </Card>
       </ListItem>
     );
   }
 
   function renderItems(items: ItemCardData[]): ReactElement {
     if (!items || items.length === 0) {
-      return <div>Nothing here! Save items to add them to manage items.</div>;
+      return <Typography>Nothing here! Create items to populate this section.</Typography>;
     }
     return (
       <>
-        <div className={'cards-grid printable-area'}>
+        <ButtonGroup variant='outlined' className={'button-row'}>
+          <Button onClick={() => handleExport(items)}>Export Items</Button>
+          <Button component='label'>
+            Import Items
+            <VisuallyHiddenInput
+              type='file'
+              onChange={(event) => handleImport(event.target.files)}
+              accept='application/json'
+            />
+          </Button>
+          <Button onClick={handleDeleteAll}>Delete All</Button>
+        </ButtonGroup>
+        <div className={'manage-cards-grid'}>
           <List>
-          {items.map((item) => {
-            return renderItem(item);
-          })}
+            {items.map((item) => {
+              return renderItem(item);
+            })}
           </List>
         </div>
       </>
     );
   }
 
-  return (
-    <div className={'manage-items-container'}>
-      {renderItems(items)}
-    </div>
-  );
+  function handleExport(items: ItemCardData[]): void {
+    const jsonRaw = JSON.stringify(items);
+    const blob = new Blob([jsonRaw], { type: 'application/json' });
+    saveAs(blob, 'magic_items_data.json');
+  }
+
+  async function readFileAsText(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          resolve(event.target.result as string);
+        } else {
+          reject(new Error('FileReader result is null or empty'));
+        }
+      };
+
+      reader.onerror = (event) => {
+        reject(event.target?.error || new Error('Unknown FileReader error'));
+      };
+
+      reader.readAsText(file);
+    });
+  }
+
+  async function handleImport(files: FileList | null): Promise<void> {
+    console.log(files);
+    const file = files?.[0];
+    if (!file) {
+      return;
+    }
+    const value = await readFileAsText(file);
+    if (!value) {
+      return;
+    }
+    const asObject = JSON.parse(value);
+    // TODO check that it is correct and matches the zod schema
+    setItems(asObject);
+  }
+
+  function handleDeleteAll(): void {
+    setItems([]);
+  }
+
+  return <div className={'manage-items-container'}>{renderItems(items)}</div>;
 };
 
 export default ManageItems;

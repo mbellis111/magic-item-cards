@@ -1,5 +1,4 @@
 .item-card-component {
-
   .image-container {
     /* Set the container position to relative so absolute positioning inside works */
     position: relative;

@@ -8,6 +8,7 @@ import {
   Snackbar,
   Stack,
   TextField,
+  Typography,
 } from '@mui/material';
 import type { ItemCardData } from '../../types.ts';
 import { useItemsContext } from '../../state/ItemsHook.tsx';
@@ -39,6 +40,10 @@ const CardEditor = () => {
   }
 
   function handleSave(): void {
+    if (!name.trim()) {
+      return;
+    }
+
     // create the item
     const newCard: ItemCardData = {
       description: description,
@@ -78,7 +83,7 @@ const CardEditor = () => {
             fullWidth
           />
           <div>
-            <div className={'section-header'}>Options</div>
+            <Typography variant={'h6'}>Options</Typography>
             <FormControlLabel
               control={
                 <Checkbox
@@ -90,7 +95,7 @@ const CardEditor = () => {
             />
           </div>
           <div>
-            <div className={'section-header'}>Actions</div>
+            <Typography variant={'h6'}>Actions</Typography>
             <ButtonGroup variant='outlined'>
               <Button onClick={handleSave}>Save</Button>
               <Button onClick={handleClear}>Clear</Button>

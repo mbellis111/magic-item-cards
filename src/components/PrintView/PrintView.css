@@ -1,5 +1,4 @@
 .print-view-component {
-
   /* override from other page to be print size */
   .image-container {
     width: 2.5in;
@@ -18,7 +17,8 @@
 
   @media print {
     /* Show the specific element and its children to print */
-    .printable-area, .printable-area * {
+    .printable-area,
+    .printable-area * {
       visibility: visible !important;
     }
 

@@ -1,13 +1,13 @@
 import cardTemplateUrl from '../../assets/card_template_medium.png';
 import exampleImageUrl from '../../assets/backpack.png';
-import {Textfit} from 'react-textfit';
+import { Textfit } from 'react-textfit';
 import {
   maxDescriptionFontPrint,
   maxDescriptionFontView,
   maxDetailsFontPrint,
   maxDetailsFontView,
   maxNameFontPrint,
-  maxNameFontView
+  maxNameFontView,
 } from '../../constants.ts';
 import ReactMarkdown from 'react-markdown';
 import './ItemCard.css';
@@ -28,7 +28,7 @@ const ItemCard = (props: Readonly<ItemCardProps>) => {
   let maxDetailsFont: number;
   let maxDescriptionFont: number;
 
-  if(printMode) {
+  if (printMode) {
     maxNameFont = maxNameFontPrint;
     maxDetailsFont = maxDetailsFontPrint;
     maxDescriptionFont = maxDescriptionFontPrint;

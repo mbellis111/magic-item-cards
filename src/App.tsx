@@ -1,11 +1,11 @@
 import CardEditor from './components/CardEditor/CardEditor.tsx';
-import { Box, Tab } from '@mui/material';
+import { Box, Tab, Typography } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { type SyntheticEvent, useState } from 'react';
 import { ItemsContext } from './state/ItemsProvider.tsx';
 import PrintView from './components/PrintView/PrintView.tsx';
+import ManageItems from './components/ManageItems/ManageItems.tsx';
 import './App.css';
-import ManageItems from "./components/ManageItems/ManageItems.tsx";
 
 function App() {
   const [value, setValue] = useState('1');
@@ -17,7 +17,9 @@ function App() {
   return (
     <>
       <ItemsContext>
-        <h2>Magic Item Creator</h2>
+        <Typography variant='h2' component='h2' gutterBottom>
+          Magic Item Cards
+        </Typography>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <TabList onChange={handleChange} aria-label='tabs_nav'>

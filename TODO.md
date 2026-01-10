@@ -18,18 +18,21 @@
   - How to properly store images in JSON??
   - Probably need to manually resize images and save in base64 format, eww
 
-
 Image Size
+
 ```
 352px x 528px
 3.67in x 5.5in
 ```
+
 Page size (letter):
+
 ```
 8.5in x 11in
 ```
 
 Print size:
+
 ```
 %68.10 of original
 240px x 360px
