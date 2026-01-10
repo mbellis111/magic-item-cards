@@ -51,7 +51,13 @@ const CardEditor = () => {
     setName('');
     setDetails('');
     setDescription('');
-    setUseMarkdown(exampleUseMarkdown);
+    setUseMarkdown(false);
+  }
+
+  function createNewItem(): void {
+    clearFields();
+    // make a new editing item UUID
+    setEditingItemUUID(uuidv7());
   }
 
   function saveItem(): void {
@@ -88,6 +94,7 @@ const CardEditor = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             fullWidth
+            required={true}
           />
           <TextField
             label='Item Details'
@@ -119,7 +126,7 @@ const CardEditor = () => {
             <Typography variant={'h6'}>Actions</Typography>
             <ButtonGroup variant='outlined'>
               <Button onClick={saveItem}>Save</Button>
-              <Button onClick={clearFields}>Clear</Button>
+              <Button onClick={createNewItem}>New Item</Button>
               <Button onClick={resetFields}>Reset</Button>
             </ButtonGroup>
           </div>
