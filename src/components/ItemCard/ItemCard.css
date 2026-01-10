@@ -65,4 +65,8 @@
       white-space: pre-wrap;
     }
   }
+
+  .description-text-inner {
+    white-space: pre-wrap;
+  }
 }

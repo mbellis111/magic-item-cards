@@ -1,4 +1,3 @@
-import { useItemsContext } from '../../state/ItemsHook.tsx';
 import type { ItemCardData } from '../../types.ts';
 import type { ReactElement } from 'react';
 import List from '@mui/material/List';
@@ -13,6 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 import { saveAs } from 'file-saver';
+import { useItemStore } from '../../state/useItemStore.ts';
 import './ManageItems.css';
 
 const VisuallyHiddenInput = styled('input')({
@@ -27,13 +27,29 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-const ManageItems = () => {
-  const { items, setItems, deleteItem } = useItemsContext();
+interface ManageItemsProps {
+  changeTab: (value: string) => void;
+}
+
+// const ItemCard = (props: Readonly<ItemCardProps>) => {
+//   const { name, details, description, useMarkdown, image, printMode } = props;
+
+const ManageItems = (props: Readonly<ManageItemsProps>) => {
+  const { changeTab } = props;
+  const items = useItemStore((state) => state.items);
+  const setItems = useItemStore((state) => state.setItems);
+  const deleteItem = useItemStore((state) => state.deleteItem);
+  const setEditingItemUUID = useItemStore((state) => state.setEditingItemUUID);
+
+  function handleEditItem(item: ItemCardData): void {
+    setEditingItemUUID(item.uuid);
+    changeTab('1');
+  }
 
   function renderItem(item: ItemCardData): ReactElement {
     return (
       <ListItem>
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ width: 345 }}>
           <CardContent>
             <Typography gutterBottom variant='h5' component='div'>
               {item.name}
@@ -43,7 +59,9 @@ const ManageItems = () => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size='small'>Edit</Button>
+            <Button size='small' onClick={() => handleEditItem(item)}>
+              Edit
+            </Button>
             <Button size='small' onClick={() => deleteItem(item)}>
               Delete
             </Button>
@@ -59,18 +77,6 @@ const ManageItems = () => {
     }
     return (
       <>
-        <ButtonGroup variant='outlined' className={'button-row'}>
-          <Button onClick={() => handleExport(items)}>Export Items</Button>
-          <Button component='label'>
-            Import Items
-            <VisuallyHiddenInput
-              type='file'
-              onChange={(event) => handleImport(event.target.files)}
-              accept='application/json'
-            />
-          </Button>
-          <Button onClick={handleDeleteAll}>Delete All</Button>
-        </ButtonGroup>
         <div className={'manage-cards-grid'}>
           <List>
             {items.map((item) => {
@@ -127,7 +133,23 @@ const ManageItems = () => {
     setItems([]);
   }
 
-  return <div className={'manage-items-container'}>{renderItems(items)}</div>;
+  return (
+    <div className={'manage-items-container'}>
+      <ButtonGroup variant='outlined' className={'button-row'}>
+        <Button onClick={() => handleExport(items)}>Export Items</Button>
+        <Button component='label'>
+          Import Items
+          <VisuallyHiddenInput
+            type='file'
+            onChange={(event) => handleImport(event.target.files)}
+            accept='application/json'
+          />
+        </Button>
+        <Button onClick={handleDeleteAll}>Delete All</Button>
+      </ButtonGroup>
+      {renderItems(items)}
+    </div>
+  );
 };
 
 export default ManageItems;

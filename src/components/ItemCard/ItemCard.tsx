@@ -60,7 +60,11 @@ const ItemCard = (props: Readonly<ItemCardProps>) => {
           mode={'multi'}
           max={maxDescriptionFont}
         >
-          {useMarkdown ? <ReactMarkdown>{description}</ReactMarkdown> : description}
+          {useMarkdown ? (
+            <ReactMarkdown>{description}</ReactMarkdown>
+          ) : (
+            <div className={'description-text-inner'}>{description}</div>
+          )}
         </Textfit>
       </div>
     </div>

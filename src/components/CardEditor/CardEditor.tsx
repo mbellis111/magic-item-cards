@@ -1,4 +1,3 @@
-import { exampleItemDescription, exampleItemDetails, exampleItemName } from '../../constants.ts';
 import { useState } from 'react';
 import {
   Button,
@@ -10,51 +9,73 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import type { ItemCardData } from '../../types.ts';
-import { useItemsContext } from '../../state/ItemsHook.tsx';
 import ItemCard from '../ItemCard/ItemCard.tsx';
+import { useItemStore } from '../../state/useItemStore.ts';
 import { v7 as uuidv7 } from 'uuid';
+import type { ItemCardData } from '../../types.ts';
+import {
+  exampleItemDescription,
+  exampleItemDetails,
+  exampleItemName,
+  exampleUseMarkdown,
+} from '../../constants.ts';
 import './CardEditor.css';
 
 const CardEditor = () => {
-  const { items, setItems } = useItemsContext();
-  const [name, setName] = useState<string>(exampleItemName);
-  const [details, setDetails] = useState<string>(exampleItemDetails);
-  const [description, setDescription] = useState<string>(exampleItemDescription);
-  const [useMarkdown, setUseMarkdown] = useState<boolean>(true);
+  // const editingItem = useItemStore((state) => state.editingItem);
+  const addOrEditItem = useItemStore((state) => state.addOrEditItem);
+  const getItem = useItemStore((state) => state.getItem);
+  const editingItemUUID = useItemStore((state) => state.editingItemUUID);
+  const setEditingItemUUID = useItemStore((state) => state.setEditingItemUUID);
 
+  const editingItem = getItem(editingItemUUID);
+
+  const [name, setName] = useState<string>(editingItem?.name ?? exampleItemName);
+  const [details, setDetails] = useState<string>(editingItem?.details ?? exampleItemDetails);
+  const [description, setDescription] = useState<string>(
+    editingItem?.description ?? exampleItemDescription,
+  );
+  const [useMarkdown, setUseMarkdown] = useState<boolean>(
+    editingItem?.useMarkDown ?? exampleUseMarkdown,
+  );
   const [showToast, setShowToast] = useState<boolean>(false);
 
-  function handleResetClicked(): void {
-    setName(exampleItemName);
-    setDetails(exampleItemDetails);
-    setDescription(exampleItemDescription);
-    setUseMarkdown(true);
+  function resetFields(): void {
+    setName(editingItem?.name ?? exampleItemName);
+    setDetails(editingItem?.details ?? exampleItemDetails);
+    setDescription(editingItem?.description ?? exampleItemDescription);
+    setUseMarkdown(editingItem?.useMarkDown ?? exampleUseMarkdown);
   }
 
-  function handleClear(): void {
+  function clearFields(): void {
     setName('');
     setDetails('');
     setDescription('');
-    setUseMarkdown(true);
+    setUseMarkdown(exampleUseMarkdown);
   }
 
-  function handleSave(): void {
+  function saveItem(): void {
     if (!name.trim()) {
       return;
     }
 
-    // create the item
-    const newCard: ItemCardData = {
-      description: description,
-      details: details,
+    const updatedItem: ItemCardData = {
+      uuid: editingItemUUID,
       name: name,
+      details: details,
+      description: description,
       useMarkDown: useMarkdown,
-      uuid: uuidv7(),
     };
 
     // add it to the provider
-    setItems([...items, newCard]);
+    addOrEditItem(updatedItem);
+
+    // make a new editing item UUID
+    setEditingItemUUID(uuidv7());
+
+    // clear the fields
+    clearFields();
+
     setShowToast(true);
   }
 
@@ -97,9 +118,9 @@ const CardEditor = () => {
           <div>
             <Typography variant={'h6'}>Actions</Typography>
             <ButtonGroup variant='outlined'>
-              <Button onClick={handleSave}>Save</Button>
-              <Button onClick={handleClear}>Clear</Button>
-              <Button onClick={handleResetClicked}>Reset</Button>
+              <Button onClick={saveItem}>Save</Button>
+              <Button onClick={clearFields}>Clear</Button>
+              <Button onClick={resetFields}>Reset</Button>
             </ButtonGroup>
           </div>
         </Stack>

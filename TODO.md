@@ -9,14 +9,16 @@
 - ~~Fix print view scaling to be consistent~~
   - ~~probably use library~~
   - ~~or fix container size to fixed amount~~
-- Implement manage page
-  - Export to json
-  - Import from json
-  - Delete managed items
+- ~~Implement manage page~~
+  - ~~Export to json~~
+  - ~~Import from json~~
+  - ~~Delete managed items~~
+  - ~~Edit item~~
   - Choose which to print
 - Add option to upload custom image when creating an item
   - How to properly store images in JSON??
   - Probably need to manually resize images and save in base64 format, eww
+- ~~Refactor to use state manager library instead of provider for data~~
 
 Image Size
 

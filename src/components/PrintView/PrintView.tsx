@@ -1,12 +1,12 @@
-import { useItemsContext } from '../../state/ItemsHook.tsx';
 import type { ItemCardData } from '../../types.ts';
 import type { ReactElement } from 'react';
 import ItemCard from '../ItemCard/ItemCard.tsx';
 import { Button, Typography } from '@mui/material';
+import { useItemStore } from '../../state/useItemStore.ts';
 import './PrintView.css';
 
 const PrintView = () => {
-  const { items } = useItemsContext();
+  const items = useItemStore((state) => state.items);
 
   function handlePrint(): void {
     window.print();
