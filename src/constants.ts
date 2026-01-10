@@ -1,5 +1,5 @@
 export const exampleItemName = 'Staff of Fire';
-export const exampleItemDetails = 'Staff, rare';
+export const exampleItemDetails = ' Staff, very rare (requires attunement by a Druid, Sorcerer, Warlock, or Wizard)';
 //export const exampleItemDescription = "You have a bonus to attack and damage rolls made with this magic weapon.";
 export const exampleItemDescription = `
 The staff has 10 charges.
@@ -13,6 +13,11 @@ The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last
 Charges: [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]
 `.trim();
 
-export const maxNameFont = 25;
-export const maxDetailsFont = 18;
-export const maxDescriptionFont = 22;
+// this is for view mode
+export const maxNameFontView = 25;
+export const maxDetailsFontView = 18;
+export const maxDescriptionFontView = 22;
+
+export const maxNameFontPrint = 19;
+export const maxDetailsFontPrint = 13;
+export const maxDescriptionFontPrint = 20;

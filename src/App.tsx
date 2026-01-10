@@ -5,6 +5,7 @@ import { type SyntheticEvent, useState } from 'react';
 import { ItemsContext } from './state/ItemsProvider.tsx';
 import PrintView from './components/PrintView/PrintView.tsx';
 import './App.css';
+import ManageItems from "./components/ManageItems/ManageItems.tsx";
 
 function App() {
   const [value, setValue] = useState('1');
@@ -28,7 +29,9 @@ function App() {
           <TabPanel value='1'>
             <CardEditor />
           </TabPanel>
-          <TabPanel value='2'>Manage Items</TabPanel>
+          <TabPanel value='2'>
+            <ManageItems />
+          </TabPanel>
           <TabPanel value='3'>
             <PrintView />
           </TabPanel>

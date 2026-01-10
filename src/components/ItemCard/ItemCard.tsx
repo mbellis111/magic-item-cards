@@ -1,7 +1,14 @@
 import cardTemplateUrl from '../../assets/card_template_medium.png';
 import exampleImageUrl from '../../assets/backpack.png';
-import { Textfit } from 'react-textfit';
-import { maxDescriptionFont, maxDetailsFont, maxNameFont } from '../../constants.ts';
+import {Textfit} from 'react-textfit';
+import {
+  maxDescriptionFontPrint,
+  maxDescriptionFontView,
+  maxDetailsFontPrint,
+  maxDetailsFontView,
+  maxNameFontPrint,
+  maxNameFontView
+} from '../../constants.ts';
 import ReactMarkdown from 'react-markdown';
 import './ItemCard.css';
 
@@ -11,10 +18,25 @@ interface ItemCardProps {
   description: string;
   useMarkdown: boolean;
   image?: string;
+  printMode?: boolean;
 }
 
 const ItemCard = (props: Readonly<ItemCardProps>) => {
-  const { name, details, description, useMarkdown, image } = props;
+  const { name, details, description, useMarkdown, image, printMode } = props;
+
+  let maxNameFont: number;
+  let maxDetailsFont: number;
+  let maxDescriptionFont: number;
+
+  if(printMode) {
+    maxNameFont = maxNameFontPrint;
+    maxDetailsFont = maxDetailsFontPrint;
+    maxDescriptionFont = maxDescriptionFontPrint;
+  } else {
+    maxNameFont = maxNameFontView;
+    maxDetailsFont = maxDetailsFontView;
+    maxDescriptionFont = maxDescriptionFontView;
+  }
 
   return (
     <div className={'item-card-component'}>

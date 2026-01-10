@@ -27,6 +27,7 @@ const PrintView = () => {
               details={item.details}
               description={item.description}
               useMarkdown={item.useMarkDown}
+              printMode={true}
               key={item.uuid}
             />
           );

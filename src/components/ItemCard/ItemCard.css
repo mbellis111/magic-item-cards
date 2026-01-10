@@ -1,4 +1,5 @@
 .item-card-component {
+
   .image-container {
     /* Set the container position to relative so absolute positioning inside works */
     position: relative;
@@ -8,8 +9,8 @@
 
   .template-image {
     /* Ensure the image fills its container */
-    width: 352px;
-    height: 528px;
+    width: 100%;
+    height: auto;
     display: block;
   }
 
@@ -17,7 +18,7 @@
     top: 16%;
     left: 50%;
     transform: translate(-50%, 0%);
-    height: 129px;
+    height: 24.44%;
     width: auto;
     object-fit: contain;
     position: absolute;
