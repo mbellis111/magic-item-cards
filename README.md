@@ -17,6 +17,7 @@ pnpm --version
 
 1. Run `pnpm install`
 2. Run locally with `pnpm dev`
+3. View at http://localhost:5173/
 
 Review [package.json](/.package.json) for additional commands.
 

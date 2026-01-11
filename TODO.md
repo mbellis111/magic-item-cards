@@ -20,6 +20,7 @@
   - Probably need to manually resize images and save in base64 format, eww
 - ~~Refactor to use state manager library instead of provider for data~~
 - ~~Add option to choose between preset image types~~
+- Check uploaded file format is valid and matches the data type
 
 ### Image Details
 

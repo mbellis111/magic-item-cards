@@ -12,11 +12,18 @@ interface ItemStore {
   setEditingItemUUID: (value: string) => void;
 }
 
+/**
+ * Manages the ItemCardData for the application
+ */
 export const useItemStore = create<ItemStore>((set, get) => ({
   // Initial state
   items: [],
   editingItemUUID: uuidv7(),
 
+  /**
+   * Set which item is currently active as the editable item.
+   * @param value - the uuid of the item
+   */
   setEditingItemUUID: (value) => {
     set({
       editingItemUUID: value,
@@ -25,6 +32,11 @@ export const useItemStore = create<ItemStore>((set, get) => ({
 
   getItem: (uuid) => get().items.find((item) => item.uuid === uuid) ?? null,
 
+  /**
+   * If an item already exists, updates the item.
+   * Otherwise, adds it as a new item.
+   * @param item
+   */
   addOrEditItem: (item) => {
     set((state) => {
       const matchingItem = state.items.find((existingItem) => existingItem.uuid === item.uuid);

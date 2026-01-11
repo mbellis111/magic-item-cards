@@ -26,9 +26,20 @@ interface ItemCardProps {
   description: string;
   useMarkdown: boolean;
   imageType: string;
+  /**
+   * If true, sizes maximum font smaller to scale to print media size
+   */
   printMode?: boolean;
 }
 
+/**
+ * Displays the item card. Supports Markdown and is resizeable to any width and height,
+ * Display text is scaled up and down to fit the image template.
+ *
+ * Uses an image template and overlays text and item image.
+ * @param props
+ * @constructor
+ */
 const ItemCard = (props: Readonly<ItemCardProps>) => {
   const { name, details, description, useMarkdown, imageType, printMode } = props;
 
@@ -46,6 +57,11 @@ const ItemCard = (props: Readonly<ItemCardProps>) => {
     maxDescriptionFont = VIEW_FONT_MAX_DESCRIPTION;
   }
 
+  /**
+   * Gets the image url to use given the type of image.
+   * Falls back to generic image if not recognized.
+   * @param imageType
+   */
   function getItemImage(imageType: string): string {
     if (imageType === IMAGE_GENERIC) {
       return genericImageUrl;

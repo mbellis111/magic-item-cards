@@ -23,10 +23,17 @@ import {
   exampleItemName,
   exampleUseMarkdown,
   IMAGE_GENERIC,
+  IMAGE_NONE,
   IMAGE_OPTIONS,
 } from '../../constants.ts';
 import './CardEditor.css';
 
+/**
+ * Used to create, store, and edit item cards.
+ * Contains fields to store data and an image preview of what the final product will look like.
+ * Updates in real-time.
+ * @constructor
+ */
 const CardEditor = () => {
   const addOrEditItem = useItemStore((state) => state.addOrEditItem);
   const getItem = useItemStore((state) => state.getItem);
@@ -46,26 +53,41 @@ const CardEditor = () => {
   const [imageType, setImageType] = useState<string>(editingItem?.image ?? IMAGE_GENERIC);
   const [showToast, setShowToast] = useState<boolean>(false);
 
+  /**
+   * If editing an existing item, resets fields to previous values.
+   * If editing a new item will fall back to example text for each editable field.
+   */
   function resetFields(): void {
     setName(editingItem?.name ?? exampleItemName);
     setDetails(editingItem?.details ?? exampleItemDetails);
     setDescription(editingItem?.description ?? exampleItemDescription);
     setUseMarkdown(editingItem?.useMarkDown ?? exampleUseMarkdown);
+    setImageType(editingItem?.image ?? IMAGE_GENERIC);
   }
 
+  /**
+   * Empties the values for all editable fields
+   */
   function clearFields(): void {
     setName('');
     setDetails('');
     setDescription('');
+    setImageType(IMAGE_NONE);
     setUseMarkdown(false);
   }
 
+  /**
+   * Creates a new item with empty fields.
+   */
   function createNewItem(): void {
     clearFields();
     // make a new editing item UUID
     setEditingItemUUID(uuidv7());
   }
 
+  /**
+   * Saves the item in the store & displays toast to user.
+   */
   function saveItem(): void {
     if (!name.trim()) {
       return;

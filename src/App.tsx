@@ -9,7 +9,11 @@ import './App.css';
 function App() {
   const [value, setValue] = useState('1');
 
-  const handleChange = (newValue: string) => {
+  /**
+   * Called when the tab is changed
+   * @param newValue - value of the new active tab
+   */
+  const handleTabChange = (newValue: string) => {
     setValue(newValue);
   };
 
@@ -22,7 +26,7 @@ function App() {
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList
             onChange={(_e, value: string) => {
-              handleChange(value);
+              handleTabChange(value);
             }}
             aria-label='tabs_nav'
           >
@@ -35,7 +39,7 @@ function App() {
           <CardEditor />
         </TabPanel>
         <TabPanel value='2'>
-          <ManageItems changeTab={handleChange} />
+          <ManageItems changeTab={handleTabChange} />
         </TabPanel>
         <TabPanel value='3'>
           <PrintView />

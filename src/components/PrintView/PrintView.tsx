@@ -5,13 +5,25 @@ import { Button, Typography } from '@mui/material';
 import { useItemStore } from '../../state/useItemStore.ts';
 import './PrintView.css';
 
+/**
+ * Handles displaying items to print, and printing the items
+ * @constructor
+ */
 const PrintView = () => {
   const items = useItemStore((state) => state.items);
 
+  /**
+   * Kicks off browser native printing
+   */
   function handlePrint(): void {
     window.print();
   }
 
+  /**
+   * Renders the print-sized values for each item in a grid fit for letter size paper.
+   * If no items, displays helper text.
+   * @param items
+   */
   function renderItems(items: ItemCardData[]): ReactElement {
     if (items.length === 0) {
       return <Typography>Nothing here! Create items to populate this section.</Typography>;
