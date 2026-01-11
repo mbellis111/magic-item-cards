@@ -1,13 +1,13 @@
 import type { ItemCardData } from '../../types.ts';
 import type { ReactElement } from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import {
+  Box,
   Button,
   ButtonGroup,
   Card,
   CardActions,
   CardContent,
+  Grid,
   styled,
   Typography,
 } from '@mui/material';
@@ -58,36 +58,38 @@ const ManageItems = (props: Readonly<ManageItemsProps>) => {
    */
   function renderItem(item: ItemCardData): ReactElement {
     return (
-      <ListItem>
-        <Card sx={{ width: 345 }}>
-          <CardContent>
-            <Typography gutterBottom variant='h5' component='div'>
-              {item.name}
-            </Typography>
-            <Typography variant='body2' sx={{ color: 'text.secondary' }}>
-              {item.details}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button
-              size='small'
-              onClick={() => {
-                handleEditItem(item);
-              }}
-            >
-              Edit
-            </Button>
-            <Button
-              size='small'
-              onClick={() => {
-                deleteItem(item);
-              }}
-            >
-              Delete
-            </Button>
-          </CardActions>
-        </Card>
-      </ListItem>
+      <Grid>
+        <Box className={'grid-box'}>
+          <Card className={'grid-card'}>
+            <CardContent>
+              <Typography gutterBottom variant='h5' component='div'>
+                {item.name}
+              </Typography>
+              <Typography variant='body2' sx={{ color: 'text.secondary' }}>
+                {item.details}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button
+                size='small'
+                onClick={() => {
+                  handleEditItem(item);
+                }}
+              >
+                Edit
+              </Button>
+              <Button
+                size='small'
+                onClick={() => {
+                  deleteItem(item);
+                }}
+              >
+                Delete
+              </Button>
+            </CardActions>
+          </Card>
+        </Box>
+      </Grid>
     );
   }
 
@@ -103,11 +105,11 @@ const ManageItems = (props: Readonly<ManageItemsProps>) => {
     return (
       <>
         <div className={'manage-cards-grid'}>
-          <List>
+          <Grid container spacing={2} alignItems='stretch'>
             {items.map((item) => {
               return renderItem(item);
             })}
-          </List>
+          </Grid>
         </div>
       </>
     );

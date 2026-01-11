@@ -1,0 +1,50 @@
+[
+  {
+    "uuid": "019baa09-1a14-760a-b330-78e52760f6d3",
+    "name": "Staff of Fire",
+    "details": " Staff, very rare (requires attunement by a Druid, Sorcerer, Warlock, or Wizard)",
+    "description": "\nThe staff has 10 charges.\nWhile holding it, you can use an action to expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC:\n  - Burning Hands (1 charge)\n  - Fireball (3 charges)\n  - Wall of Fire (4 charges).\n\nThe staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff blackens, crumbles into cinders, and is destroyed.\n\nCharges: [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]\n",
+    "useMarkDown": false,
+    "image": "WEAPON"
+  },
+  {
+    "uuid": "019baa09-359f-70ff-ab51-2a7043f35f9b",
+    "name": "Matt Bellis",
+    "details": "Human male (34)",
+    "description": "This is a person, not an object. Treat them as such",
+    "useMarkDown": false,
+    "image": "NONE"
+  },
+  {
+    "uuid": "019baa13-0aef-726b-9e51-dfa778d5f565",
+    "name": "Staff of Stormclouds",
+    "details": "Staff, rare (requires attunement by a spellcaster)",
+    "description": "This staff is used to cast the following spells. It has 10 maximum charges and regains 1d8+2 charges at dawn each day.\n\n- Fog cloud (1 charge)\n- Call lightning (2 charges)\n- Control weather (3 charges)\n\nWhen you use the last charge, roll a d20. On a 1 the staff disintegrates and turns to dust.\nCharges: [  ] [  ] [  ] [  ] [  ] [  ] [  ] [  ] [  ] [  ]",
+    "useMarkDown": true,
+    "image": "WEAPON"
+  },
+  {
+    "uuid": "019baa17-5b4d-74d5-89a9-093922826353",
+    "name": "Aldeyr's Family Crest Tattoo",
+    "details": "Wondrous item (tattoo), rare (requires attunement)",
+    "description": "Produced by a special needle, this magic tattoo depicts Aldey'rs family crest and uses ink that resembles liquid metal.\n\n**Protection.** \nWhile you aren’t wearing armor, the tattoo grants you an Armor Class of 15 + your Dexterity modifier. You can use a shield and still gain this benefit.\n\n**Protective Spells**\nAllows for casting of the following spells once per long rest each.\n[  ] Absorb Elements\n[  ] Shield",
+    "useMarkDown": true,
+    "image": "WONDROUS"
+  },
+  {
+    "uuid": "019baeb3-e832-775b-a12a-81ae25ee9e69",
+    "name": "Widowmaker",
+    "details": "Weapon (dagger), rare, finesse, light, thrown (20/60 ft.)",
+    "description": "**Adamantine**\nWhenever this weapon hits an object, the hit is a Critical Hit.\n**Returning**\nThis weapons returns to your hand immediately after you use it to make a ranged attack roll.\n**Teleporting**\nAfter throwing the dagger you may teleport to it as a bonus action, at any point in its trajectory. This ability recharges after a short rest.\nCharges: [ ]",
+    "useMarkDown": true,
+    "image": "WEAPON"
+  },
+  {
+    "uuid": "019baebe-834b-72d8-8633-b1ffa257a1c5",
+    "name": "Thragg's Retort",
+    "details": "Weapon (gauntlets), very rare (requires attunement), silvered ",
+    "description": "*Damage: 1d8 bludgeoning, and 1d4 cold*\n**Free Spirit** [  ]\nAs an action the user can break free from any charm, incapitation, paralyzed, or restrained effect. This ability recharges on a long rest.\n**Giants Growth** [  ]\nAs an action you can cast the spell *Enlarge/Reduce*, but only to enlarge. This ability recharges on a long rest.\n**Rime of Ancient Skald** [  ] [  ] [  ] [  ] [  ]\nThe gauntlets have 5 charges and recharge after a long rest. It uses your spell save DC and spellcasting ability modifier.\n\nFrost Impact (1 charge): deals an additional 1d6 cold damage to next attack\nFan of Frost (2 charges): as per *Burning Hands*, but cold damage\nBlast of Icicles (3 charges): as per *Scorching Ray*, but cold damage",
+    "useMarkDown": true,
+    "image": "WEAPON"
+  }
+]
