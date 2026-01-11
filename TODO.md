@@ -2,7 +2,7 @@
 
 - ~~Add options not to use markdown or others~~
 - Options for different card styles (use css classes?)
-- Use Alex's simpler template
+  - Use Alex's simpler template
 - ~~Add option to make image or print (html2pdf?)~~
 - ~~Embed font~~
 - ~~Add print view~~
@@ -19,6 +19,9 @@
   - How to properly store images in JSON??
   - Probably need to manually resize images and save in base64 format, eww
 - ~~Refactor to use state manager library instead of provider for data~~
+- ~~Add option to choose between preset image types~~
+
+### Image Details
 
 Image Size
 

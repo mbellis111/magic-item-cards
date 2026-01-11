@@ -3,7 +3,11 @@ import {
   Button,
   ButtonGroup,
   Checkbox,
+  FormControl,
   FormControlLabel,
+  InputLabel,
+  MenuItem,
+  Select,
   Snackbar,
   Stack,
   TextField,
@@ -18,11 +22,12 @@ import {
   exampleItemDetails,
   exampleItemName,
   exampleUseMarkdown,
+  IMAGE_GENERIC,
+  IMAGE_OPTIONS,
 } from '../../constants.ts';
 import './CardEditor.css';
 
 const CardEditor = () => {
-  // const editingItem = useItemStore((state) => state.editingItem);
   const addOrEditItem = useItemStore((state) => state.addOrEditItem);
   const getItem = useItemStore((state) => state.getItem);
   const editingItemUUID = useItemStore((state) => state.editingItemUUID);
@@ -38,6 +43,7 @@ const CardEditor = () => {
   const [useMarkdown, setUseMarkdown] = useState<boolean>(
     editingItem?.useMarkDown ?? exampleUseMarkdown,
   );
+  const [imageType, setImageType] = useState<string>(editingItem?.image ?? IMAGE_GENERIC);
   const [showToast, setShowToast] = useState<boolean>(false);
 
   function resetFields(): void {
@@ -71,16 +77,14 @@ const CardEditor = () => {
       details: details,
       description: description,
       useMarkDown: useMarkdown,
+      image: imageType,
     };
 
     // add it to the provider
     addOrEditItem(updatedItem);
 
-    // make a new editing item UUID
-    setEditingItemUUID(uuidv7());
-
-    // clear the fields
-    clearFields();
+    // reset fields for new item
+    createNewItem();
 
     setShowToast(true);
   }
@@ -92,14 +96,18 @@ const CardEditor = () => {
           <TextField
             label='Item Name'
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
             fullWidth
             required={true}
           />
           <TextField
             label='Item Details'
             value={details}
-            onChange={(e) => setDetails(e.target.value)}
+            onChange={(e) => {
+              setDetails(e.target.value);
+            }}
             fullWidth
           />
           <TextField
@@ -107,20 +115,46 @@ const CardEditor = () => {
             multiline
             rows={12}
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
             fullWidth
           />
           <div>
             <Typography variant={'h6'}>Options</Typography>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={useMarkdown}
-                  onChange={(e) => setUseMarkdown(e.target.checked)}
-                />
-              }
-              label='Use Markdown'
-            />
+            <Stack direction='row' spacing={5}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={useMarkdown}
+                    onChange={(e) => {
+                      setUseMarkdown(e.target.checked);
+                    }}
+                  />
+                }
+                label='Use Markdown'
+              />
+              <FormControl fullWidth>
+                <InputLabel id='image-type-select-label'>Image Type</InputLabel>
+                <Select
+                  labelId='image-typeselect-label'
+                  id='image-type-select'
+                  value={imageType}
+                  label='Image Type'
+                  onChange={(event) => {
+                    setImageType(event.target.value);
+                  }}
+                >
+                  {IMAGE_OPTIONS.map((type) => {
+                    return (
+                      <MenuItem value={type} key={type}>
+                        {type}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </Stack>
           </div>
           <div>
             <Typography variant={'h6'}>Actions</Typography>
@@ -137,13 +171,16 @@ const CardEditor = () => {
             details={details}
             description={description}
             useMarkdown={useMarkdown}
+            imageType={imageType}
           />
         </div>
       </div>
       <Snackbar
         open={showToast}
         autoHideDuration={2000}
-        onClose={() => setShowToast(false)}
+        onClose={() => {
+          setShowToast(false);
+        }}
         message={`Saved ${name}`}
         anchorOrigin={{
           horizontal: 'center',

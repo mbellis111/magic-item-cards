@@ -59,10 +59,20 @@ const ManageItems = (props: Readonly<ManageItemsProps>) => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size='small' onClick={() => handleEditItem(item)}>
+            <Button
+              size='small'
+              onClick={() => {
+                handleEditItem(item);
+              }}
+            >
               Edit
             </Button>
-            <Button size='small' onClick={() => deleteItem(item)}>
+            <Button
+              size='small'
+              onClick={() => {
+                deleteItem(item);
+              }}
+            >
               Delete
             </Button>
           </CardActions>
@@ -72,7 +82,7 @@ const ManageItems = (props: Readonly<ManageItemsProps>) => {
   }
 
   function renderItems(items: ItemCardData[]): ReactElement {
-    if (!items || items.length === 0) {
+    if (items.length === 0) {
       return <Typography>Nothing here! Create items to populate this section.</Typography>;
     }
     return (
@@ -107,7 +117,7 @@ const ManageItems = (props: Readonly<ManageItemsProps>) => {
       };
 
       reader.onerror = (event) => {
-        reject(event.target?.error || new Error('Unknown FileReader error'));
+        reject(event.target?.error ?? new Error('Unknown FileReader error'));
       };
 
       reader.readAsText(file);
@@ -124,8 +134,8 @@ const ManageItems = (props: Readonly<ManageItemsProps>) => {
     if (!value) {
       return;
     }
-    const asObject = JSON.parse(value);
     // TODO check that it is correct and matches the zod schema
+    const asObject: ItemCardData[] = JSON.parse(value) as ItemCardData[];
     setItems(asObject);
   }
 
@@ -136,12 +146,20 @@ const ManageItems = (props: Readonly<ManageItemsProps>) => {
   return (
     <div className={'manage-items-container'}>
       <ButtonGroup variant='outlined' className={'button-row'}>
-        <Button onClick={() => handleExport(items)}>Export Items</Button>
+        <Button
+          onClick={() => {
+            handleExport(items);
+          }}
+        >
+          Export Items
+        </Button>
         <Button component='label'>
           Import Items
           <VisuallyHiddenInput
             type='file'
-            onChange={(event) => handleImport(event.target.files)}
+            onChange={(event) => {
+              void handleImport(event.target.files);
+            }}
             accept='application/json'
           />
         </Button>

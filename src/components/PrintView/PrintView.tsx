@@ -13,7 +13,7 @@ const PrintView = () => {
   }
 
   function renderItems(items: ItemCardData[]): ReactElement {
-    if (!items || items.length === 0) {
+    if (items.length === 0) {
       return <Typography>Nothing here! Create items to populate this section.</Typography>;
     }
     return (
@@ -29,6 +29,7 @@ const PrintView = () => {
                 details={item.details}
                 description={item.description}
                 useMarkdown={item.useMarkDown}
+                imageType={item.image}
                 printMode={true}
                 key={item.uuid}
               />

@@ -16,10 +16,17 @@ Charges: [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]
 export const exampleUseMarkdown = false;
 
 // this is for view mode
-export const maxNameFontView = 25;
-export const maxDetailsFontView = 18;
-export const maxDescriptionFontView = 22;
+export const VIEW_FONT_MAX_NAME = 25;
+export const VIEW_FONT_MAX_DETAILS = 18;
+export const VIEW_FONT_MAX_DESCRIPTION = 22;
 
-export const maxNameFontPrint = 19;
-export const maxDetailsFontPrint = 13;
-export const maxDescriptionFontPrint = 20;
+export const PRINT_FONT_MAX_NAME = 19;
+export const PRINT_FONT_MAX_DETAILS = 13;
+export const PRINT_FONT_MAX_DESCRIPTION = 20;
+
+export const IMAGE_NONE = 'NONE';
+export const IMAGE_ARMOR = 'ARMOR';
+export const IMAGE_WEAPON = 'WEAPON';
+export const IMAGE_WONDROUS = 'WONDROUS';
+export const IMAGE_GENERIC = 'GENERIC';
+export const IMAGE_OPTIONS = [IMAGE_NONE, IMAGE_ARMOR, IMAGE_WEAPON, IMAGE_WONDROUS, IMAGE_GENERIC];

@@ -4,4 +4,5 @@ export interface ItemCardData {
   description: string;
   useMarkDown: boolean;
   uuid: string;
+  image: string;
 }

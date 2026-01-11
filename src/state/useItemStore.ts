@@ -17,14 +17,15 @@ export const useItemStore = create<ItemStore>((set, get) => ({
   items: [],
   editingItemUUID: uuidv7(),
 
-  setEditingItemUUID: (value) =>
+  setEditingItemUUID: (value) => {
     set({
       editingItemUUID: value,
-    }),
+    });
+  },
 
   getItem: (uuid) => get().items.find((item) => item.uuid === uuid) ?? null,
 
-  addOrEditItem: (item) =>
+  addOrEditItem: (item) => {
     set((state) => {
       const matchingItem = state.items.find((existingItem) => existingItem.uuid === item.uuid);
       if (matchingItem) {
@@ -33,6 +34,7 @@ export const useItemStore = create<ItemStore>((set, get) => ({
         matchingItem.description = item.description;
         matchingItem.name = item.name;
         matchingItem.useMarkDown = item.useMarkDown;
+        matchingItem.image = item.image;
         return {
           items: state.items,
         };
@@ -41,15 +43,18 @@ export const useItemStore = create<ItemStore>((set, get) => ({
           items: [...state.items, item],
         };
       }
-    }),
+    });
+  },
 
-  setItems: (newItems: ItemCardData[]) =>
+  setItems: (newItems: ItemCardData[]) => {
     set({
       items: newItems,
-    }),
+    });
+  },
 
-  deleteItem: (item: ItemCardData) =>
+  deleteItem: (item: ItemCardData) => {
     set((state) => ({
       items: state.items.filter((todo) => todo.uuid !== item.uuid),
-    })),
+    }));
+  },
 }));

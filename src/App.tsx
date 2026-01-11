@@ -20,7 +20,12 @@ function App() {
       </Typography>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={(_e, value) => handleChange(value)} aria-label='tabs_nav'>
+          <TabList
+            onChange={(_e, value: string) => {
+              handleChange(value);
+            }}
+            aria-label='tabs_nav'
+          >
             <Tab label='Create Item' value='1' />
             <Tab label='Manage Items' value='2' />
             <Tab label='Print Items' value='3' />

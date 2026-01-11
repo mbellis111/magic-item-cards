@@ -1,11 +1,24 @@
-# React + TypeScript + Vite
+# Magic Item Cards
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Requirements
 
-Currently, two official plugins are available:
+```
+npm --version
+11.6.2
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+node --version
+v24.12.0
+
+pnpm --version
+10.27.0
+```
+
+## Setup
+
+1. Run `pnpm install`
+2. Run locally with `pnpm dev`
+
+Review [package.json](/.package.json) for additional commands.
 
 ## React Compiler
 
